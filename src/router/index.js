@@ -3,7 +3,6 @@ import Dashboard from "../views/Dashboard.vue";
 import Tables from "../views/Tables.vue";
 import Billing from "../views/Billing.vue";
 import VirtualReality from "../views/VirtualReality.vue";
-import RTL from "../views/Rtl.vue";
 import Profile from "../views/Profile.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
@@ -35,11 +34,6 @@ const routes = [
     component: VirtualReality,
   },
   {
-    path: "/rtl-page",
-    name: "RTL",
-    component: RTL,
-  },
-  {
     path: "/profile",
     name: "Profile",
     component: Profile,
@@ -60,6 +54,17 @@ const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
   linkActiveClass: "active",
+});
+
+router.beforeEach((to, from, next) => {
+  const token = sessionStorage.getItem('jodoSafePlace') || false
+
+  // Se a rota for diferente de /signin e não houver token, redireciona para /signin
+  if (to.path !== '/signin' && !token) {
+    next('/signin'); // Redireciona para a página de login
+  } else {
+    next(); // Caso contrário, permite a navegação
+  }
 });
 
 export default router;

@@ -10,8 +10,9 @@
           class="carousel-item h-100 active"
           :style="{
             backgroundImage:
-              'url(' + require('@/assets/img/carousel-1.jpg') + ')',
+              'url(https://ucarecdn.com/b49ab65c-b84a-42a2-b338-add84854cae8/Screenshotfrom20240924144230.png)',
             backgroundSize: 'cover',
+            backgroundPosition: 'center'
           }"
         >
           <div

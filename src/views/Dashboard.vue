@@ -3,10 +3,50 @@ import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
 import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "./components/Carousel.vue";
 import CategoriesList from "./components/CategoriesList.vue";
+import { ref, onMounted } from 'vue';
 
-import US from "@/assets/img/icons/flags/US.png";
-import DE from "@/assets/img/icons/flags/DE.png";
-import GB from "@/assets/img/icons/flags/GB.png";
+
+// services
+import categoriesService from "@/services/categoriesService"
+
+
+// tags
+const categories = ref([]);
+
+const categoryObjkt = (data) => {
+  return {
+    icon: {
+      component: 'ni ni-tag',
+      background: 'dark',
+    },
+    id: data.id,
+    label: data.title,
+    description: typeof data.author!== 'number' ? `Criado por <strong>${data.author}</strong>` : `Criado por <strong> voce   u.u'</strong>`
+  }
+}
+
+async function getCategories() {
+  const list = await categoriesService.list();
+  console.log(list)
+  categories.value = list.map(category => { return categoryObjkt(category)});
+}
+
+const handleNewTag = async (value) => {
+  const createTag = await categoriesService.create({ title: value})
+  categories.value.push(categoryObjkt(createTag))
+}
+
+const handleDeleteTag = async (id) => {
+  const deletedTag = await categoriesService.remove(id)
+  if (deletedTag.tag?.message) {
+    categories.value = categories.value.filter(category => category.id !== id)
+  }
+}
+onMounted(() => {
+    getCategories();
+});
+
+
 import BR from "@/assets/img/icons/flags/BR.png";
 
 const sales = {
@@ -15,21 +55,21 @@ const sales = {
     sales: 2500,
     value: "$230,900",
     bounce: "29.9%",
-    flag: US,
+    flag: BR,
   },
   germany: {
     country: "Germany",
     sales: "3.900",
     value: "$440,000",
     bounce: "40.22%",
-    flag: DE,
+    flag: BR,
   },
   britain: {
     country: "Great Britain",
     sales: "1.400",
     value: "$190,700",
     bounce: "23.44%",
-    flag: GB,
+    flag: BR,
   },
   brasil: {
     country: "Brasil",
@@ -57,6 +97,7 @@ const sales = {
                 background: 'bg-gradient-primary',
                 shape: 'rounded-circle',
               }"
+              backgroundImageUrl="https://pbs.twimg.com/media/GR_MmPbWYAAHgNZ?format=jpg&name=large"
             />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
@@ -71,6 +112,7 @@ const sales = {
                 background: 'bg-gradient-danger',
                 shape: 'rounded-circle',
               }"
+              backgroundImageUrl="https://ucarecdn.com/82c28675-2a32-4d29-8c4d-2cfc624b4484/photo_20240919_210246.jpg"
             />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
@@ -188,34 +230,10 @@ const sales = {
           </div>
           <div class="col-lg-5">
             <categories-list
-              :categories="[
-                {
-                  icon: {
-                    component: 'ni ni-mobile-button',
-                    background: 'dark',
-                  },
-                  label: 'Devices',
-                  description: '250 in stock <strong>346+ sold</strong>',
-                },
-                {
-                  icon: {
-                    component: 'ni ni-tag',
-                    background: 'dark',
-                  },
-                  label: 'Tickets',
-                  description: '123 closed <strong>15 open</strong>',
-                },
-                {
-                  icon: { component: 'ni ni-box-2', background: 'dark' },
-                  label: 'Error logs',
-                  description: '1 is active <strong>40 closed</strong>',
-                },
-                {
-                  icon: { component: 'ni ni-satisfied', background: 'dark' },
-                  label: 'Happy Users',
-                  description: '+ 430',
-                },
-              ]"
+              :categories="categories"
+              @new-tag="handleNewTag"
+              @delete-tag="handleDeleteTag"
+              :title="'Tag'"
             />
           </div>
         </div>

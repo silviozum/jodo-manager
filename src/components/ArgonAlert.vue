@@ -47,3 +47,11 @@ const getIcon = (icon) => (icon ? icon : null);
     </button>
   </div>
 </template>
+<style lang="css" scoped>
+.alert{
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  z-index: 99999999;
+}
+</style>

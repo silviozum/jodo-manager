@@ -60,35 +60,29 @@ defineProps({
     type: String,
     default: "",
   },
+  backgroundImageUrl: {
+    type: String,
+    default: 'https://ucarecdn.com/6de2c351-f579-4759-9a6e-01586c33062d/logo.png'
+  }
 });
+ // URL da imagem de fundo
 </script>
 <template>
-  <div class="mb-3 card">
+  <div class="mb-3 card filter-on-image"     
+    v-bind:style="{
+      backgroundImage: 'url(' + backgroundImageUrl + ')',
+      backgroundSize: 'cover',
+      backgroundPosition: 'center',
+    }">
     <div class="p-3 card-body">
       <div
         class="d-flex"
         :class="rowReverse ? '' : 'flex-row-reverse justify-content-between'"
       >
-        <div
-          class="text-center shadow icon icon-shape"
-          :class="[
-            typeof icon === 'object'
-              ? `${icon.background} ${icon.shape}`
-              : 'border-radius-md',
-            rowReverse ? 'me-2' : '',
-          ]"
-        >
-          <i
-            class="text-lg opacity-10"
-            :class="typeof icon === 'string' ? icon : icon.component"
-            aria-hidden="true"
-          ></i>
-        </div>
         <div :class="classContent">
           <div class="numbers">
             <p
               class="mb-0 text-sm text-uppercase font-weight-bold"
-              :class="title.color"
             >
               {{ typeof title === "string" ? title : title.text }}
             </p>
@@ -120,3 +114,9 @@ defineProps({
     </div>
   </div>
 </template>
+<style lang="css" scoped>
+.filter-on-image {
+  background-color:rgba(78, 45, 105, 0.4);
+  backdrop-filter: blur(4px) contrast(111%) saturate(101%);
+}
+</style>

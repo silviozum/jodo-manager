@@ -1,19 +1,27 @@
 <script setup>
-import { onBeforeUnmount, onBeforeMount } from "vue";
+import { onBeforeUnmount, onBeforeMount, ref } from "vue";
+import { activateDarkMode } from "@/assets/js/dark-mode";
+import { useRouter } from 'vue-router'
 import { useStore } from "vuex";
-import Navbar from "@/examples/PageLayout/Navbar.vue";
 import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonSwitch from "@/components/ArgonSwitch.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
+import ArgonAlert from "@/components/ArgonAlert.vue";
+import authService from "@/services/authService"
 const body = document.getElementsByTagName("body")[0];
+const setSidebarType = (type) => store.commit("sidebarType", type);
 
 const store = useStore();
+const router = useRouter(); 
 onBeforeMount(() => {
   store.state.hideConfigButton = true;
   store.state.showNavbar = false;
   store.state.showSidenav = false;
   store.state.showFooter = false;
+  store.state.darkMode = true;
   body.classList.remove("bg-gray-100");
+  setSidebarType("bg-default");
+  activateDarkMode();
 });
 onBeforeUnmount(() => {
   store.state.hideConfigButton = false;
@@ -22,19 +30,31 @@ onBeforeUnmount(() => {
   store.state.showFooter = true;
   body.classList.add("bg-gray-100");
 });
+
+const emailUser = ref(null)
+const passUser = ref(null)
+
+const alertError = ref(false)
+
+const handleSubmit = async () => {
+  const data = {
+	email: emailUser.value,
+	pass: passUser.value
+}
+  const processLogin = await authService.login(data)
+  if (!processLogin.success) {
+    alertError.value = processLogin.message.message
+    setTimeout(() => {
+      alertError.value = false
+    }, 3000);
+    return false
+  }
+  sessionStorage.setItem('jodoSafePlace', processLogin.message.user.token);
+  router.push('/dashboard-default');
+};
+
 </script>
 <template>
-  <div class="container top-0 position-sticky z-index-sticky">
-    <div class="row">
-      <div class="col-12">
-        <navbar
-          isBlur="blur  border-radius-lg my-3 py-2 start-0 end-0 mx-4 shadow"
-          v-bind:darkMode="true"
-          isBtn="bg-gradient-success"
-        />
-      </div>
-    </div>
-  </div>
   <main class="mt-0 main-content">
     <section>
       <div class="page-header min-vh-100">
@@ -45,11 +65,10 @@ onBeforeUnmount(() => {
             >
               <div class="card card-plain">
                 <div class="pb-0 card-header text-start">
-                  <h4 class="font-weight-bolder">Sign In</h4>
-                  <p class="mb-0">Enter your email and password to sign in</p>
+                  <h4 class="font-weight-bolder">Loga aqui</h4>
                 </div>
                 <div class="card-body">
-                  <form role="form">
+                  <form role="form" @submit.prevent="handleSubmit">
                     <div class="mb-3">
                       <argon-input
                         id="email"
@@ -57,6 +76,7 @@ onBeforeUnmount(() => {
                         placeholder="Email"
                         name="email"
                         size="lg"
+                        v-model="emailUser"
                       />
                     </div>
                     <div class="mb-3">
@@ -66,6 +86,7 @@ onBeforeUnmount(() => {
                         placeholder="Password"
                         name="password"
                         size="lg"
+                        v-model="passUser"
                       />
                     </div>
                     <argon-switch id="rememberMe" name="remember-me"
@@ -83,8 +104,9 @@ onBeforeUnmount(() => {
                       >
                     </div>
                   </form>
+                  <argon-alert class="mt-10" color="danger" v-if="alertError">{{alertError}}</argon-alert>
                 </div>
-                <div class="px-1 pt-0 text-center card-footer px-lg-2">
+                <!-- <div class="px-1 pt-0 text-center card-footer px-lg-2">
                   <p class="mx-auto mb-4 text-sm">
                     Don't have an account?
                     <a
@@ -93,7 +115,7 @@ onBeforeUnmount(() => {
                       >Sign up</a
                     >
                   </p>
-                </div>
+                </div> -->
               </div>
             </div>
             <div
@@ -102,20 +124,17 @@ onBeforeUnmount(() => {
               <div
                 class="position-relative bg-gradient-primary h-100 m-3 px-7 border-radius-lg d-flex flex-column justify-content-center overflow-hidden"
                 style="
-                  background-image: url(&quot;https://raw.githubusercontent.com/creativetimofficial/public-assets/master/argon-dashboard-pro/assets/img/signin-ill.jpg&quot;);
+                  background-image: url(&quot;https://ucarecdn.com/d8371f3e-7f8e-467a-ad24-3cc3beb6a060/photo_20241223_011854.jpg&quot;);
                   background-size: cover;
                 "
               >
+                <img src="https://ucarecdn.com/60fcc27c-c20d-4c1b-992f-a95e63c601fa/JODOLOGOBRANCO.png">
                 <span class="mask bg-gradient-success opacity-6"></span>
-                <h4
-                  class="mt-5 text-white font-weight-bolder position-relative"
+                <h2
+                  class="text-white font-weight-bolder position-relative"
                 >
-                  "Attention is the new currency"
-                </h4>
-                <p class="text-white position-relative">
-                  The more effortless the writing looks, the more effort the
-                  writer actually put into the process.
-                </p>
+                  J O D O
+                </h2>
               </div>
             </div>
           </div>
