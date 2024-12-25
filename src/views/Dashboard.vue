@@ -8,10 +8,12 @@ import { ref, onMounted } from 'vue';
 
 // services
 import categoriesService from "@/services/categoriesService"
+import eventsService from "@/services/eventsService"
 
 
 // tags
 const categories = ref([]);
+const events = ref([])
 
 const categoryObjkt = (data) => {
   return {
@@ -27,7 +29,6 @@ const categoryObjkt = (data) => {
 
 async function getCategories() {
   const list = await categoriesService.list();
-  console.log(list)
   categories.value = list.map(category => { return categoryObjkt(category)});
 }
 
@@ -42,8 +43,16 @@ const handleDeleteTag = async (id) => {
     categories.value = categories.value.filter(category => category.id !== id)
   }
 }
+
+// events
+async function getFeaturedEvents() {
+  const list = await eventsService.list()
+  console.log(list.events)
+  events.value = list.events.map(item => item)
+} 
 onMounted(() => {
     getCategories();
+    getFeaturedEvents();
 });
 
 
@@ -176,7 +185,7 @@ const sales = {
             </div>
           </div>
           <div class="col-lg-5">
-            <carousel />
+            <carousel :events="events"/>
           </div>
         </div>
         <div class="row mt-4">

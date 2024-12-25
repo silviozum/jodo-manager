@@ -1,3 +1,18 @@
+<script setup>
+import { onBeforeMount } from 'vue';
+
+const props = defineProps({
+  events: {
+    required: true
+  },
+});
+
+onBeforeMount(() => {
+  console.log(props.events)
+})
+
+
+</script>
 <template>
   <div class="card card-carousel overflow-hidden h-100 p-0">
     <div
@@ -5,77 +20,29 @@
       class="carousel slide h-100"
       data-bs-ride="carousel"
     >
-      <div class="carousel-inner border-radius-lg h-100">
+      <div class="carousel-inner border-radius-lg h-100" >
         <div
-          class="carousel-item h-100 active"
-          :style="{
-            backgroundImage:
-              'url(https://ucarecdn.com/b49ab65c-b84a-42a2-b338-add84854cae8/Screenshotfrom20240924144230.png)',
-            backgroundSize: 'cover',
-            backgroundPosition: 'center'
-          }"
+            v-for="(event,index) in events"
+            :key="index"
+            class="carousel-item h-100 active"
+            :style="{
+              backgroundImage: `url(${event.image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center'
+            }"
         >
-          <div
-            class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5"
-          >
-            <div
-              class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3"
-            >
+        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+          <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
               <i class="ni ni-camera-compact text-dark opacity-10"></i>
-            </div>
-            <h5 class="text-white mb-1">Get started with Argon</h5>
+          </div>
+            <h5 class="text-white mb-1">{{ event.name }}</h5>
             <p>
-              There’s nothing I really wanted to do in life that I wasn’t able
-              to get good at.
+              <i class="ni ni-square-pin"></i>
+              {{ event.location }}
             </p>
           </div>
         </div>
-        <div
-          class="carousel-item h-100"
-          :style="{
-            backgroundImage:
-              'url(' + require('@/assets/img/carousel-2.jpg') + ')',
-            backgroundSize: 'cover',
-          }"
-        >
-          <div
-            class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5"
-          >
-            <div
-              class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3"
-            >
-              <i class="ni ni-bulb-61 text-dark opacity-10"></i>
-            </div>
-            <h5 class="text-white mb-1">Faster way to create web pages</h5>
-            <p>
-              That’s my skill. I’m not really specifically talented at anything
-              except for the ability to learn.
-            </p>
-          </div>
-        </div>
-        <div
-          class="carousel-item h-100"
-          :style="{
-            backgroundImage:
-              'url(' + require('@/assets/img/carousel-3.jpg') + ')',
-            backgroundSize: 'cover',
-          }"
-        >
-          <div
-            class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5"
-          >
-            <div
-              class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3"
-            >
-              <i class="ni ni-trophy text-dark opacity-10"></i>
-            </div>
-            <h5 class="text-white mb-1">Share with us your design tips!</h5>
-            <p>
-              Don’t be afraid to be wrong because you can’t learn anything from
-              a compliment.
-            </p>
-          </div>
-        </div>
+
       </div>
       <button
         class="carousel-control-prev w-5 me-3"
@@ -98,3 +65,19 @@
     </div>
   </div>
 </template>
+<style lang="css" scoped>
+.custom-bg-opc {
+  position: relative;
+}
+.custom-bg-opc:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  background-color:rgba(255, 255, 255, 0.4);
+  backdrop-filter: brightness(0.19) contrast(104%);
+}
+</style>
