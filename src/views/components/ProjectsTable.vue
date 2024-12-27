@@ -1,3 +1,17 @@
+<script setup>
+import { useRouter } from 'vue-router';
+ defineProps({
+  list: {
+    required: true
+  },
+});
+
+const router = useRouter(); 
+
+function eventPage(id) {
+  router.push(`/event/${id}`)
+}
+</script>
 <template>
   <div class="card mb-4">
     <div class="card-header pb-0">
@@ -11,309 +25,54 @@
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7"
               >
-                Project
+                Evento
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
               >
-                Budget
+                Publicado
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2"
               >
-                Status
+                Local
               </th>
               <th
                 class="text-uppercase text-secondary text-xxs font-weight-bolder text-center opacity-7 ps-2"
               >
-                Completion
+                Data
               </th>
               <th></th>
             </tr>
           </thead>
           <tbody>
-            <tr>
+            <tr v-for="(event, index) in list" :key="index">
               <td>
                 <div class="d-flex px-2">
                   <div>
                     <img
-                      src="../../assets/img/small-logos/logo-spotify.svg"
-                      class="avatar avatar-sm rounded-circle me-2"
+                      :src="event.image"
+                      class="avatar avatar-sm  me-2 avatar-propagang"
                       alt="spotify"
                     />
                   </div>
                   <div class="my-auto">
-                    <h6 class="mb-0 text-sm">Spotify</h6>
+                    <h6 class="mb-0 text-sm">{{ event.name }}</h6>
                   </div>
                 </div>
               </td>
               <td>
-                <p class="text-sm font-weight-bold mb-0">$2,500</p>
+                <p class="text-sm font-weight-bold mb-0" v-if="event.published"><i class="ni ni-send"></i> Publicado</p>
+                <p class="text-sm font-weight-bold mb-0" v-else><i class="ni ni-send"></i> Não Publicado</p>
               </td>
               <td>
-                <span class="text-xs font-weight-bold">working</span>
+                <span class="text-xs font-weight-bold"><i class="ni ni-pin-3"></i> {{event.location}}</span>
               </td>
               <td class="align-middle text-center">
-                <div class="d-flex align-items-center justify-content-center">
-                  <span class="me-2 text-xs font-weight-bold">60%</span>
-                  <div>
-                    <div class="progress">
-                      <div
-                        class="progress-bar bg-gradient-info"
-                        role="progressbar"
-                        aria-valuenow="60"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        style="width: 60%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
+                <p class="text-sm font-weight-bold mb-0">{{ event.when }}</p>
               </td>
               <td class="align-middle">
-                <button class="btn btn-link text-secondary mb-0">
-                  <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex px-2">
-                  <div>
-                    <img
-                      src="../../assets/img/small-logos/logo-invision.svg"
-                      class="avatar avatar-sm rounded-circle me-2"
-                      alt="invision"
-                    />
-                  </div>
-                  <div class="my-auto">
-                    <h6 class="mb-0 text-sm">Invision</h6>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <p class="text-sm font-weight-bold mb-0">$5,000</p>
-              </td>
-              <td>
-                <span class="text-xs font-weight-bold">done</span>
-              </td>
-              <td class="align-middle text-center">
-                <div class="d-flex align-items-center justify-content-center">
-                  <span class="me-2 text-xs font-weight-bold">100%</span>
-                  <div>
-                    <div class="progress">
-                      <div
-                        class="progress-bar bg-gradient-success"
-                        role="progressbar"
-                        aria-valuenow="100"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        style="width: 100%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle">
-                <button
-                  class="btn btn-link text-secondary mb-0"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex px-2">
-                  <div>
-                    <img
-                      src="../../assets/img/small-logos/logo-jira.svg"
-                      class="avatar avatar-sm rounded-circle me-2"
-                      alt="jira"
-                    />
-                  </div>
-                  <div class="my-auto">
-                    <h6 class="mb-0 text-sm">Jira</h6>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <p class="text-sm font-weight-bold mb-0">$3,400</p>
-              </td>
-              <td>
-                <span class="text-xs font-weight-bold">canceled</span>
-              </td>
-              <td class="align-middle text-center">
-                <div class="d-flex align-items-center justify-content-center">
-                  <span class="me-2 text-xs font-weight-bold">30%</span>
-                  <div>
-                    <div class="progress">
-                      <div
-                        class="progress-bar bg-gradient-danger"
-                        role="progressbar"
-                        aria-valuenow="30"
-                        aria-valuemin="0"
-                        aria-valuemax="30"
-                        style="width: 30%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle">
-                <button
-                  class="btn btn-link text-secondary mb-0"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex px-2">
-                  <div>
-                    <img
-                      src="../../assets/img/small-logos/logo-slack.svg"
-                      class="avatar avatar-sm rounded-circle me-2"
-                      alt="slack"
-                    />
-                  </div>
-                  <div class="my-auto">
-                    <h6 class="mb-0 text-sm">Slack</h6>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <p class="text-sm font-weight-bold mb-0">$1,000</p>
-              </td>
-              <td>
-                <span class="text-xs font-weight-bold">canceled</span>
-              </td>
-              <td class="align-middle text-center">
-                <div class="d-flex align-items-center justify-content-center">
-                  <span class="me-2 text-xs font-weight-bold">0%</span>
-                  <div>
-                    <div class="progress">
-                      <div
-                        class="progress-bar bg-gradient-success"
-                        role="progressbar"
-                        aria-valuenow="0"
-                        aria-valuemin="0"
-                        aria-valuemax="0"
-                        style="width: 0%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle">
-                <button
-                  class="btn btn-link text-secondary mb-0"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex px-2">
-                  <div>
-                    <img
-                      src="https://demos.creative-tim.com/argon-dashboard/assets/img/small-logos/logo-webdev.svg"
-                      class="avatar avatar-sm rounded-circle me-2"
-                      alt="webdev"
-                    />
-                  </div>
-                  <div class="my-auto">
-                    <h6 class="mb-0 text-sm">Webdev</h6>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <p class="text-sm font-weight-bold mb-0">$14,000</p>
-              </td>
-              <td>
-                <span class="text-xs font-weight-bold">working</span>
-              </td>
-              <td class="align-middle text-center">
-                <div class="d-flex align-items-center justify-content-center">
-                  <span class="me-2 text-xs font-weight-bold">80%</span>
-                  <div>
-                    <div class="progress">
-                      <div
-                        class="progress-bar bg-gradient-info"
-                        role="progressbar"
-                        aria-valuenow="80"
-                        aria-valuemin="0"
-                        aria-valuemax="80"
-                        style="width: 80%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle">
-                <button
-                  class="btn btn-link text-secondary mb-0"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>
-                </button>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                <div class="d-flex px-2">
-                  <div>
-                    <img
-                      src="../../assets/img/small-logos/logo-xd.svg"
-                      class="avatar avatar-sm rounded-circle me-2"
-                      alt="xd"
-                    />
-                  </div>
-                  <div class="my-auto">
-                    <h6 class="mb-0 text-sm">Adobe XD</h6>
-                  </div>
-                </div>
-              </td>
-              <td>
-                <p class="text-sm font-weight-bold mb-0">$2,300</p>
-              </td>
-              <td>
-                <span class="text-xs font-weight-bold">done</span>
-              </td>
-              <td class="align-middle text-center">
-                <div class="d-flex align-items-center justify-content-center">
-                  <span class="me-2 text-xs font-weight-bold">100%</span>
-                  <div>
-                    <div class="progress">
-                      <div
-                        class="progress-bar bg-gradient-success"
-                        role="progressbar"
-                        aria-valuenow="100"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                        style="width: 100%"
-                      ></div>
-                    </div>
-                  </div>
-                </div>
-              </td>
-              <td class="align-middle">
-                <button
-                  class="btn btn-link text-secondary mb-0"
-                  aria-haspopup="true"
-                  aria-expanded="false"
-                >
-                  <i class="fa fa-ellipsis-v text-xs" aria-hidden="true"></i>
-                </button>
+                <button class="btn btn-primary" @click="eventPage(event.id)">ver infos</button>
               </td>
             </tr>
           </tbody>
@@ -322,3 +81,10 @@
     </div>
   </div>
 </template>
+<style lang="css" scoped>
+.avatar-propagang {
+    width: 90px !important;
+    height:90px !important;
+    font-size: 0.875rem;
+}
+</style>

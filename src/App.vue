@@ -13,13 +13,15 @@ Coded by www.creative-tim.com
 * The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
 -->
 <script setup>
-import { computed, onBeforeMount} from "vue";
+import { computed, onBeforeMount, ref} from "vue";
 import { useStore } from "vuex";
 import Sidenav from "./examples/Sidenav";
-import Configurator from "@/examples/Configurator.vue";
+import ArgonAlert from "@/components/ArgonAlert.vue";
 import Navbar from "@/examples/Navbars/Navbar.vue";
 import AppFooter from "@/examples/Footer.vue";
 import { activateDarkMode } from "@/assets/js/dark-mode";
+import eventBus from './utils/eventBus';
+
 
 const store = useStore();
 const isNavFixed = computed(() => store.state.isNavFixed);
@@ -29,15 +31,26 @@ const showSidenav = computed(() => store.state.showSidenav);
 const layout = computed(() => store.state.layout);
 const showNavbar = computed(() => store.state.showNavbar);
 const showFooter = computed(() => store.state.showFooter);
-const showConfig = computed(() => store.state.showConfig);
-const hideConfigButton = computed(() => store.state.hideConfigButton);
-const toggleConfigurator = () => store.commit("toggleConfigurator")
 
 const setSidebarType = (type) => store.commit("sidebarType", type);
+
+const alert = ref(false)
+const alertMessage = ref('')
+
+const updateEvent = (payload) => {
+    alert.value = true
+    alertMessage.value = payload
+
+    setTimeout(() => {
+      alert.value = false
+      alertMessage.value = ''
+      }, 3000);
+  };
 
 onBeforeMount(() => {
   setSidebarType("bg-default");
   activateDarkMode();
+  eventBus.on('event', updateEvent);
 });
 
 const navClasses = computed(() => {
@@ -70,9 +83,6 @@ const navClasses = computed(() => {
 
     <app-footer v-show="showFooter" />
 
-    <configurator
-      :toggle="toggleConfigurator"
-      :class="[showConfig ? 'show' : '', hideConfigButton ? 'd-none' : '']"
-    />
+    <argon-alert class="mt-10" color="warning" v-if="alert">{{alertMessage}}</argon-alert>
   </main>
 </template>

@@ -1,6 +1,6 @@
 import axios from '@/utils/axios'
 const API = process.env.VUE_APP_API_BASE_URL
-const token = sessionStorage.getItem('jodoSafePlace');
+
 
 async function list(data) {
     const tags = await axios
@@ -12,6 +12,7 @@ async function list(data) {
 }
 
 async function create(data) {
+    const token = sessionStorage.getItem('jodoSafePlace');
     const tags = await axios
     .post(`${API}/tags/create`, data, {
         headers: {
@@ -25,6 +26,7 @@ async function create(data) {
 }
 
 async function remove(id) {
+    const token = sessionStorage.getItem('jodoSafePlace');
     const tags = await axios
     .delete(`${API}/tags/delete/${id}`, {
         headers: {

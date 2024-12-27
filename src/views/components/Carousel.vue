@@ -1,17 +1,9 @@
 <script setup>
-import { onBeforeMount } from 'vue';
-
-const props = defineProps({
+ defineProps({
   events: {
     required: true
   },
 });
-
-onBeforeMount(() => {
-  console.log(props.events)
-})
-
-
 </script>
 <template>
   <div class="card card-carousel overflow-hidden h-100 p-0">
@@ -31,7 +23,7 @@ onBeforeMount(() => {
               backgroundPosition: 'center'
             }"
         >
-        <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
+        <!-- <div class="carousel-caption d-none d-md-block bottom-0 text-start start-0 ms-5">
           <div class="icon icon-shape icon-sm bg-white text-center border-radius-md mb-3">
               <i class="ni ni-camera-compact text-dark opacity-10"></i>
           </div>
@@ -40,7 +32,7 @@ onBeforeMount(() => {
               <i class="ni ni-square-pin"></i>
               {{ event.location }}
             </p>
-          </div>
+          </div> -->
         </div>
 
       </div>

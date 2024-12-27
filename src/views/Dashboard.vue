@@ -159,7 +159,7 @@ const sales = {
             <div class="card z-index-2">
               <gradient-line-chart
                 id="chart-line"
-                title="Sales Overview"
+                title="Mais Lidos"
                 description="<i class='fa fa-arrow-up text-success'></i>
       <span class='font-weight-bold'>4% more</span> in 2021"
                 :chart="{
@@ -193,7 +193,7 @@ const sales = {
             <div class="card">
               <div class="p-3 pb-0 card-header">
                 <div class="d-flex justify-content-between">
-                  <h6 class="mb-2">Sales by Country</h6>
+                  <h6 class="mb-2">Artigos</h6>
                 </div>
               </div>
               <div class="table-responsive">

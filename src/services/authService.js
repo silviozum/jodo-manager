@@ -9,6 +9,17 @@ async function login(data) {
     });
     return user
 }
+
+async function getUsers() {
+  const users = await axios
+  .get(`${API}/users`)
+  .then((response) => {
+    return response.data
+  });
+  return users
+}
+
 export default ({
-    login
+    login,
+    getUsers
 })

@@ -2,10 +2,14 @@ import { createRouter, createWebHistory } from "vue-router";
 import Dashboard from "../views/Dashboard.vue";
 import Tables from "../views/Tables.vue";
 import Billing from "../views/Billing.vue";
+import CreateEvent from "../views/CreateEvent.vue";
+import Events from "../views/Events.vue";
+import Admins from "../views/Admins.vue";
 import VirtualReality from "../views/VirtualReality.vue";
 import Profile from "../views/Profile.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
+import Articles from "../views/Articles.vue";
 
 const routes = [
   {
@@ -47,6 +51,26 @@ const routes = [
     path: "/signup",
     name: "Signup",
     component: Signup,
+  },
+  {
+    path: "/events",
+    name: "Events",
+    component: Events,
+  },
+  {
+    path: "/event/:id",
+    name: "CreateEvent",
+    component: CreateEvent,
+  },
+  {
+    path: "/admins",
+    name: "Admins",
+    component: Admins,
+  },
+  {
+    path: "/articles",
+    name: "Articles",
+    component: Articles,
   },
 ];
 

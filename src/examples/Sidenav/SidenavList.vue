@@ -35,9 +35,9 @@ const getRoute = () => {
 
       <li class="nav-item">
         <sidenav-item
-          to="/tables"
+          to="/articles"
           :class="getRoute() === 'tables' ? 'active' : ''"
-          :navText="isRTL ? 'الجداول' : 'Tables'"
+          :navText="isRTL ? 'الجداول' : 'Artigos'"
         >
           <template v-slot:icon>
             <i
@@ -51,7 +51,7 @@ const getRoute = () => {
         <sidenav-item
           to="/billing"
           :class="getRoute() === 'billing' ? 'active' : ''"
-          :navText="isRTL ? 'الفواتیر' : 'Billing'"
+          :navText="isRTL ? 'الفواتیر' : 'Artistas'"
         >
           <template v-slot:icon>
             <i class="ni ni-credit-card text-success text-sm opacity-10"></i>
@@ -61,12 +61,22 @@ const getRoute = () => {
 
       <li class="nav-item">
         <sidenav-item
-          to="/virtual-reality"
-          :class="getRoute() === 'virtual-reality' ? 'active' : ''"
-          :navText="isRTL ? 'الواقع الافتراضي' : 'Virtual Reality'"
+          to="/events"
+          :navText="'Events'"
         >
           <template v-slot:icon>
             <i class="ni ni-app text-info text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+
+      <li class="nav-item">
+        <sidenav-item
+          to="/admins"
+          :navText="'Admins'"
+        >
+          <template v-slot:icon>
+            <i class="ni ni-user-run text-info text-sm opacity-10"></i>
           </template>
         </sidenav-item>
       </li>
