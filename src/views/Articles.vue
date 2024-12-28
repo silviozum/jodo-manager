@@ -1,5 +1,8 @@
 <script setup>
 import { onBeforeMount, ref } from "vue";
+import { useRouter } from 'vue-router';
+const router = useRouter(); 
+
 import ArgonButton from "@/components/ArgonButton.vue";
 import articleService from "@/services/articleService"
 const articles = ref([])
@@ -7,6 +10,10 @@ const articles = ref([])
 async function getList () {
   const list = await articleService.list()
   articles.value = list
+}
+
+function updateArticle (id) {
+  router.push(`/article/${id}`)
 }
 
 onBeforeMount(() => {
@@ -79,7 +86,7 @@ onBeforeMount(() => {
                 >
               </td>
               <td class="align-middle">
-                <argon-button color="success" size="sm" class="ms-auto" @click="updateArticle">Editar</argon-button>
+                <argon-button color="success" size="sm" class="ms-auto" @click="updateArticle(article.id)">Editar</argon-button>
               </td>
             </tr>
 

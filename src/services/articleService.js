@@ -12,6 +12,36 @@ async function list() {
   return users
 }
 
+async function article(id) {
+  const token = sessionStorage.getItem('jodoSafePlace');
+  const data = await axios
+  .get(`${API}/article/${id}`, {
+      headers: {
+          Authorization: `Bearer ${token}`  // Adiciona o Bearer token no cabeçalho
+      }
+  })
+  .then((response) => {
+    return response.data
+  });
+  return data
+}
+
+async function update(article) {
+  const id = article.id
+  const token = sessionStorage.getItem('jodoSafePlace');
+  const data = await axios
+  .put(`${API}/article/${id}`, article,{
+      headers: {
+          Authorization: `Bearer ${token}`  // Adiciona o Bearer token no cabeçalho
+      }
+  })
+  .then((response) => {
+    return response.data
+  });
+  return data
+}
 export default ({
-  list
+  list,
+  article,
+  update
 })

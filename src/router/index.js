@@ -10,6 +10,7 @@ import Profile from "../views/Profile.vue";
 import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
 import Articles from "../views/Articles.vue";
+import CreateArticle from "../views/CreateArticle.vue"
 
 const routes = [
   {
@@ -72,6 +73,11 @@ const routes = [
     name: "Articles",
     component: Articles,
   },
+  {
+    path: "/article/:id",
+    name: "CreateArticle",
+    component: CreateArticle,
+  }
 ];
 
 const router = createRouter({
