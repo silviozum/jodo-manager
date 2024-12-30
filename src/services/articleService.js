@@ -40,8 +40,40 @@ async function update(article) {
   });
   return data
 }
+
+async function create() {
+  const token = sessionStorage.getItem('jodoSafePlace');
+  const data = await axios
+  .post(`${API}/article/`, [],{
+      headers: {
+          Authorization: `Bearer ${token}`  // Adiciona o Bearer token no cabeçalho
+      }
+  })
+  .then((response) => {
+    return response.data
+  });
+  return data
+}
+
+async function remove(id) {
+  const token = sessionStorage.getItem('jodoSafePlace');
+  const data = await axios
+  .delete(`${API}/article/${id}`,{
+      headers: {
+          Authorization: `Bearer ${token}`  // Adiciona o Bearer token no cabeçalho
+      }
+  })
+  .then((response) => {
+    return response.data
+  });
+  return data
+}
+
+
 export default ({
   list,
   article,
-  update
+  update,
+  create,
+  remove
 })

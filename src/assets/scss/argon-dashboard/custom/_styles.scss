@@ -1,0 +1,36 @@
+/* Firefox (uncomment to work in Firefox, although other properties will not work!)  */
+/** {
+  scrollbar-width: thin;
+  scrollbar-color: #503B75 #8392AB;
+}*/
+
+/* Chrome, Edge and Safari */
+*::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+  }
+  *::-webkit-scrollbar-track {
+    border-radius: 5px;
+    background-color: #8392AB;
+  }
+  
+  *::-webkit-scrollbar-track:hover {
+    background-color: #8392AB;
+  }
+  
+  *::-webkit-scrollbar-track:active {
+    background-color: #8392AB;
+  }
+  
+  *::-webkit-scrollbar-thumb {
+    border-radius: 7px;
+    background-color: #503B75;
+  }
+  
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #503B75;
+  }
+  
+  *::-webkit-scrollbar-thumb:active {
+    background-color: #503B75;
+  }

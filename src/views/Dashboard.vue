@@ -1,8 +1,8 @@
 <script setup>
 import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
-import GradientLineChart from "@/examples/Charts/GradientLineChart.vue";
 import Carousel from "./components/Carousel.vue";
 import CategoriesList from "./components/CategoriesList.vue";
+import Board from "./components/Board.vue";
 import { ref, onMounted } from 'vue';
 
 
@@ -56,38 +56,6 @@ onMounted(() => {
 });
 
 
-import BR from "@/assets/img/icons/flags/BR.png";
-
-const sales = {
-  us: {
-    country: "United States",
-    sales: 2500,
-    value: "$230,900",
-    bounce: "29.9%",
-    flag: BR,
-  },
-  germany: {
-    country: "Germany",
-    sales: "3.900",
-    value: "$440,000",
-    bounce: "40.22%",
-    flag: BR,
-  },
-  britain: {
-    country: "Great Britain",
-    sales: "1.400",
-    value: "$190,700",
-    bounce: "23.44%",
-    flag: BR,
-  },
-  brasil: {
-    country: "Brasil",
-    sales: "562",
-    value: "$143,960",
-    bounce: "32.14%",
-    flag: BR,
-  },
-};
 </script>
 <template>
   <div class="py-4 container-fluid">
@@ -106,7 +74,6 @@ const sales = {
                 background: 'bg-gradient-primary',
                 shape: 'rounded-circle',
               }"
-              backgroundImageUrl="https://pbs.twimg.com/media/GR_MmPbWYAAHgNZ?format=jpg&name=large"
             />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
@@ -136,6 +103,7 @@ const sales = {
                 background: 'bg-gradient-success',
                 shape: 'rounded-circle',
               }"
+              backgroundImageUrl="https://ucarecdn.com/1e2e8ca2-e618-4333-b57b-2be93847f7d4/Screenshotfrom20241229034050.png"
             />
           </div>
           <div class="col-lg-3 col-md-6 col-12">
@@ -150,93 +118,11 @@ const sales = {
                 background: 'bg-gradient-warning',
                 shape: 'rounded-circle',
               }"
+              backgroundImageUrl="https://pbs.twimg.com/media/GR_MmPbWYAAHgNZ?format=jpg&name=large"
             />
           </div>
         </div>
-        <div class="row">
-          <div class="col-lg-7 mb-lg">
-            <!-- line chart -->
-            <div class="card z-index-2">
-              <gradient-line-chart
-                id="chart-line"
-                title="Mais Lidos"
-                description="<i class='fa fa-arrow-up text-success'></i>
-      <span class='font-weight-bold'>4% more</span> in 2021"
-                :chart="{
-                  labels: [
-                    'Apr',
-                    'May',
-                    'Jun',
-                    'Jul',
-                    'Aug',
-                    'Sep',
-                    'Oct',
-                    'Nov',
-                    'Dec',
-                  ],
-                  datasets: [
-                    {
-                      label: 'Mobile Apps',
-                      data: [50, 40, 300, 220, 500, 250, 400, 230, 500],
-                    },
-                  ],
-                }"
-              />
-            </div>
-          </div>
-          <div class="col-lg-5">
-            <carousel :events="events"/>
-          </div>
-        </div>
         <div class="row mt-4">
-          <div class="col-lg-7 mb-lg-0 mb-4">
-            <div class="card">
-              <div class="p-3 pb-0 card-header">
-                <div class="d-flex justify-content-between">
-                  <h6 class="mb-2">Artigos</h6>
-                </div>
-              </div>
-              <div class="table-responsive">
-                <table class="table align-items-center">
-                  <tbody>
-                    <tr v-for="(sale, index) in sales" :key="index">
-                      <td class="w-30">
-                        <div class="px-2 py-1 d-flex align-items-center">
-                          <div>
-                            <img :src="sale.flag" alt="Country flag" />
-                          </div>
-                          <div class="ms-4">
-                            <p class="mb-0 text-xs font-weight-bold">
-                              Country:
-                            </p>
-                            <h6 class="mb-0 text-sm">{{ sale.country }}</h6>
-                          </div>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-weight-bold">Sales:</p>
-                          <h6 class="mb-0 text-sm">{{ sale.sales }}</h6>
-                        </div>
-                      </td>
-                      <td>
-                        <div class="text-center">
-                          <p class="mb-0 text-xs font-weight-bold">Value:</p>
-                          <h6 class="mb-0 text-sm">{{ sale.value }}</h6>
-                        </div>
-                      </td>
-                      <td class="text-sm align-middle">
-                        <div class="text-center col">
-                          <p class="mb-0 text-xs font-weight-bold">Bounce:</p>
-                          <h6 class="mb-0 text-sm">{{ sale.bounce }}</h6>
-                        </div>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-            </div>
-          </div>
           <div class="col-lg-5">
             <categories-list
               :categories="categories"
@@ -245,6 +131,15 @@ const sales = {
               :title="'Tag'"
             />
           </div>
+          <div class="col-lg-7">
+            <carousel :events="events"/>
+          </div>
+        </div>
+        <div class="row mt-4">
+          <div class="col-lg-5 mb-lg">
+            <Board/>
+          </div>
+
         </div>
       </div>
     </div>

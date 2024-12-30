@@ -25,8 +25,6 @@ async function getEvent(eventId) {
   event.value = list.data[0] || []
 }
 
-
-
 const store = useStore();
 
 function handlePost(delta) {

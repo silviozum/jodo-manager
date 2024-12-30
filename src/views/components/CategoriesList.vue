@@ -48,7 +48,7 @@ const handleDeleteCategory = (id) => {
       <h6 class="mb-0">{{ title }}</h6>
     </div>
     <div class="p-3 card-body">
-      <ul :class="`list-group ${isRTL ? 'pe-0' : ''}`">
+      <ul class="list-group list-tags-container">
         <li
           v-for="(
             { icon: { component, background }, label, description, id }, index
@@ -105,3 +105,9 @@ const handleDeleteCategory = (id) => {
     </div>
   </div>
 </template>
+<style lang="css" scoped>
+.list-tags-container {
+  height: 400px;
+  overflow: auto;
+}
+</style>

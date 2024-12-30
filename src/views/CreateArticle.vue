@@ -49,16 +49,25 @@ async function getTags() {
 async function handleArticle() {
   article.value.tags = tagsSelected.value.join(",")
   const update = await articleService.update(article.value)
-  eventBus.emit('event', update.message);
+  console.log(update)
+  if (update.success) {
+    eventBus.emit('event', update.message);
+    router.push('/articles')
+  }
 }
 
-function removeArticle (id) {
-  console.log(id)
+async function removeArticle (id) {
+  const article = await articleService.remove(id);
+  if (article.success) {
+    router.push('/articles')
+  }
+
 }
 
 function handlePost(delta) {
     article.value.content = delta
 }
+
 
 onMounted(() => {
   store.state.isAbsolute = true;
@@ -139,7 +148,7 @@ onBeforeUnmount(() => {
                 </div>
                 <div class="col-md-12">
                     <div class="form-group">
-                        <label for="exampleFormControlTextarea1">Example textarea</label>
+                        <label for="exampleFormControlTextarea1">Descrição</label>
                         <textarea class="form-control" id="exampleFormControlTextarea1" rows="4" v-model="article.description"></textarea>
                     </div>
                 </div>
