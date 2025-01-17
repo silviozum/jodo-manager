@@ -11,6 +11,8 @@ import Signup from "../views/Signup.vue";
 import Signin from "../views/Signin.vue";
 import Articles from "../views/Articles.vue";
 import CreateArticle from "../views/CreateArticle.vue"
+import Archives from "../views/Archives.vue"
+import CreateArchive from "../views/CreateArchive.vue"
 
 const routes = [
   {
@@ -77,6 +79,16 @@ const routes = [
     path: "/article/:id",
     name: "CreateArticle",
     component: CreateArticle,
+  },
+  {
+    path: "/archives",
+    name: "Archives",
+    component: Archives,
+  },
+  {
+    path: "/archive/:id",
+    name: "CreateArchive",
+    component: CreateArchive,
   }
 ];
 

@@ -72,6 +72,18 @@ const getRoute = () => {
 
       <li class="nav-item">
         <sidenav-item
+          to="/archives"
+          :navText="'Arquivo JODO'"
+        >
+          <template v-slot:icon>
+            <i class="ni ni-folder-17 text-info text-sm opacity-10"></i>
+          </template>
+        </sidenav-item>
+      </li>
+
+
+      <li class="nav-item">
+        <sidenav-item
           to="/admins"
           :navText="'Admins'"
         >

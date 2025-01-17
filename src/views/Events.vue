@@ -40,7 +40,7 @@ onMounted(() => {
         <projects-table  :list="events"/>
       </div>
     </div>
-    <h3>Próximos Eventos</h3>
+    <!-- <h3>Próximos Eventos</h3>
     <div style="display: flex;">
       <div v-for="(event, index) in events" :key="index" class="card col-4 p-3 m-1">
         <img class="card-img-top" :src="event.image" alt="Card image cap">
@@ -52,8 +52,7 @@ onMounted(() => {
           <a :href="`/event/${event.id}`" class="btn btn-primary">ver Infos</a>
         </div>
       </div>
-  
-    </div>
+    </div> -->
     
   </div>
 </template>
