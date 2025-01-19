@@ -13,13 +13,8 @@ async function list() {
 }
 
 async function article(id) {
-  const token = sessionStorage.getItem('jodoSafePlace');
   const data = await axios
-  .get(`${API}/article/${id}`, {
-      headers: {
-          Authorization: `Bearer ${token}`  // Adiciona o Bearer token no cabeçalho
-      }
-  })
+  .get(`${API}/article/${id}`)
   .then((response) => {
     return response.data
   });

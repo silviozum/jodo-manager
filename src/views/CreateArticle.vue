@@ -49,7 +49,7 @@ async function getTags() {
 async function handleArticle() {
   article.value.tags = tagsSelected.value.join(",")
   const update = await articleService.update(article.value)
-  console.log(update)
+
   if (update.success) {
     eventBus.emit('event', update.message);
     router.push('/articles')
