@@ -6,7 +6,6 @@ defineProps({
   },
   title: {
     type: [Object, String],
-    required: true,
     text: {
       type: String,
     },
@@ -20,7 +19,6 @@ defineProps({
   },
   value: {
     type: [Object, String, Number],
-    required: true,
     text: {
       type: [String, Number],
     },
@@ -68,44 +66,27 @@ defineProps({
  // URL da imagem de fundo
 </script>
 <template>
-  <div class="mb-3 card filter-on-image"     
+  <div class="mb-3 card filter-on-image artist-shadow"     
     v-bind:style="{
       backgroundImage: 'url(' + backgroundImageUrl + ')',
       backgroundSize: 'cover',
       backgroundPosition: 'center',
+      height: '100px',
+      cursor: 'pointer'
     }">
-    <div class="p-3 card-body">
+    <div class="p-3 card-body artist-card-info">
       <div
         class="d-flex"
         :class="rowReverse ? '' : 'flex-row-reverse justify-content-between'"
       >
         <div :class="classContent">
           <div class="numbers">
-            <p
-              class="mb-0 text-sm text-uppercase font-weight-bold"
-            >
+            <h5>
               {{ typeof title === "string" ? title : title.text }}
-            </p>
-            <h5 :class="`mb-0 font-weight-bolder ${value.color}`">
-              {{
-                (value && typeof value === "string") ||
-                (value && typeof value === "number")
-                  ? value
-                  : value.text
-              }}
-              <span
-                v-if="percentage && typeof percentage === 'string'"
-                class="text-sm font-weight-bolder"
-              >
-                {{ percentage }}
-              </span>
-              <span
-                v-if="percentage && typeof percentage === 'object'"
-                :class="`text-sm font-weight-bolder text-${percentage.color}`"
-              >
-                {{ percentage.value }}
-              </span>
             </h5>
+            <p class="mb-0 text-sm font-weight-bold">
+                {{ value }} plays no Spotify
+            </p>
             <!--  eslint-disable-next-line vue/no-v-html -->
             <p v-if="description" class="mt-2 mb-0" v-html="description"></p>
           </div>
@@ -118,5 +99,20 @@ defineProps({
 .filter-on-image {
   background-color:rgba(78, 45, 105, 0.4);
   backdrop-filter: blur(4px) contrast(111%) saturate(101%);
+}
+.artist-shadow {
+  position: relative;
+}
+.artist-shadow:hover:after {
+  height: 100%;
+  width: 100%;
+  content: '';
+  background-color: rgba(0, 0, 0, 0.7); 
+  position: absolute;
+  border-radius: 1rem;
+}
+.artist-card-info {
+  position: absolute;
+  z-index: 999;
 }
 </style>

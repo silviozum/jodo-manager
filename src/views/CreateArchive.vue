@@ -151,7 +151,7 @@ onBeforeUnmount(() => {
           <div class="card">
             <div class="card-header pb-0">
               <div class="d-flex align-items-center">
-                <p class="mb-0">Editar Archivo</p>
+                <p class="mb-0">Editar Arquivo</p>
                 <argon-button color="warning" size="sm" class="ms-auto" @click="removeArchive(archive.id)">remover</argon-button>
                 <argon-button color="success" size="sm" class="ms-3" @click="handleArchive">Salvar</argon-button>
               </div>

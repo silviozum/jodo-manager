@@ -13,6 +13,8 @@ import Articles from "../views/Articles.vue";
 import CreateArticle from "../views/CreateArticle.vue"
 import Archives from "../views/Archives.vue"
 import CreateArchive from "../views/CreateArchive.vue"
+import Artists from "../views/Artists.vue";
+import CreateArtist from "../views/CreateArtist.vue";
 
 const routes = [
   {
@@ -89,6 +91,16 @@ const routes = [
     path: "/archive/:id",
     name: "CreateArchive",
     component: CreateArchive,
+  },
+  {
+    path: "/artists",
+    name: "Artists",
+    component: Artists,
+  },
+  {
+    path: "/artist/:id",
+    name: "CreateArtist",
+    component: CreateArtist,
   }
 ];
 

@@ -8,6 +8,7 @@ import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const boardList = ref(null)
 const messageCreated = ref('')
+const componentKey = ref(0)
 
 const getBoard = async () => {
     const list = await boardService.list()
@@ -20,12 +21,14 @@ function handlePost(delta) {
 
 async function saveMessage() {
     if (messageCreated.value) {
-        const data = {
-            content: messageCreated.value
-        }
-        const newMessage = await boardService.create(data)
-        if (newMessage)
-        boardList.value.unshift(newMessage)
+      const data = {
+          content: messageCreated.value
+      }
+      const newMessage = await boardService.create(data)
+      if (newMessage)
+      boardList.value.unshift(newMessage)
+      componentKey.value += 1 
+      messageCreated.value = '' 
     }
 }
 
@@ -39,7 +42,8 @@ onBeforeMount(() => {
     <div class="card p-3 mb-4">
         <h6 class="ms-2 mb-3">JWEETER!!!</h6>
         <div>
-            <QuillEditor 
+            <QuillEditor
+            :key="componentKey"
             theme="snow"
             style="max-height:2000px; min-height: 100px;" 
             contentType="html" 
@@ -67,7 +71,7 @@ onBeforeMount(() => {
                 <span class="mb-1">{{message.user_name}}</span>
               </div>
             </div>
-            <div v-html="message.content" class="board-message ms-6 mt-2"></div>
+            <div v-html="message.content" class="board-message  mt-2"></div>
           </div>
         </div>
       </div>

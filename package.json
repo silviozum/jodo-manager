@@ -20,6 +20,10 @@
     "prettify": "prettier --write ."
   },
   "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.7.2",
+    "@fortawesome/free-brands-svg-icons": "^6.7.2",
+    "@fortawesome/free-solid-svg-icons": "^6.7.2",
+    "@fortawesome/vue-fontawesome": "^3.0.8",
     "@popperjs/core": "2.11.8",
     "@vueup/vue-quill": "^1.2.0",
     "axios": "^1.7.9",
