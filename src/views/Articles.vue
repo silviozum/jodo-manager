@@ -99,5 +99,6 @@ onBeforeMount(() => {
 .avatar-article {
   width: 250px !important;
   height: 150px !important;
+  object-fit: cover;
 }
 </style>

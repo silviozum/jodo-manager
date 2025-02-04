@@ -9,6 +9,9 @@ import setTooltip from "@/assets/js/tooltip.js";
 import ArgonInput from "@/components/ArgonInput.vue";
 import ArgonButton from "@/components/ArgonButton.vue";
 
+import { QuillEditor } from '@vueup/vue-quill'
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
+
 //routes
 import { useRouter } from 'vue-router';
 const router = useRouter(); 
@@ -85,6 +88,10 @@ async function removeArchive (id) {
     eventBus.emit('event', archive.message.message);
   }
 
+}
+
+function handlePost(delta) {
+    archive.value.description = delta
 }
 
 
@@ -187,7 +194,6 @@ onBeforeUnmount(() => {
                     >Imagem Thumb</label
                   >
                   <argon-input type="text" v-model="archive.img_thumb" />
-                  <img :src="archive.img_thumb" width="200">
                 </div>
               </div>
               <hr class="horizontal dark" />
@@ -215,11 +221,18 @@ onBeforeUnmount(() => {
                   >
                   <argon-input type="text" v-model="archive.video" @change="getVideoLink(archive.video)"/>
                 </div>
-                <div class="col-md-12">
-                  <label for="example-text-input" class="form-control-label"
-                    >Descrição</label
-                  >
-                  <textarea class="form-control" v-model="archive.description" id="exampleFormControlTextarea1" rows="3"></textarea>
+                <div class="col-md-12" style="margin-top: 60px;">
+                  <div>
+                        <QuillEditor 
+                        theme="snow" 
+                        toolbar="full" 
+                        style="height:800px" 
+                        contentType="html" 
+                        :content="archive.description"
+                        @update:content="handlePost"
+
+                        />
+                    </div>
                 </div>
               </div>
               <div class="col-md-12" style="margin-top: 60px;">
@@ -236,6 +249,10 @@ onBeforeUnmount(() => {
             :src="videoLink"
             class="responsive-iframe"
           ></iframe>
+          <div class="row archive-thumb">
+            <span>Imagem Thumb</span>
+            <img :src="archive.img_thumb" width="200">
+          </div>
         </div>
       </div>
     </div>
@@ -244,12 +261,19 @@ onBeforeUnmount(() => {
 <style lang="css" scoped>
 .responsive-iframe {
   width: 100%; /* Ocupa toda a largura da célula */
-  height: 50%; /* Ocupa toda a altura da célula */
+  height: 300px; /* Ocupa toda a altura da célula */
   border: none; /* Remove a borda padrão */
 }
 .datePicker {
   display: block;
   border-radius: 6px;
   padding: 8px;
+}
+.archive-thumb {
+  margin-top: 60px;
+}
+.archive-thumb span {
+  font-size: 20px;
+  font-weight: bold;
 }
 </style>

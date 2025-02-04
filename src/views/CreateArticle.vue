@@ -68,6 +68,15 @@ function handlePost(delta) {
     article.value.content = delta
 }
 
+async function handlePreview (id) {
+  try {
+    await handleArticle();
+    const url = `https://jodo-desk-production.up.railway.app/preview/${id}`
+    window.open(url, '_blank');
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 onMounted(() => {
   store.state.isAbsolute = true;
@@ -202,6 +211,7 @@ onBeforeUnmount(() => {
                   <div class="custom-control custom-checkbox">
                   <input type="checkbox" class="custom-control-input" id="customCheck1" v-model="article.published" :checked="article.published">
                   <label class="custom-control-label text-lg" for="customCheck1">Publicar</label>
+                  <argon-button color="info" size="sm" class="ms-3" @click="handlePreview(article.id)">Preview</argon-button>
                   </div>
               </div>
             </div>
