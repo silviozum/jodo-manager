@@ -71,7 +71,7 @@ function handlePost(delta) {
 async function handlePreview (id) {
   try {
     await handleArticle();
-    const url = `https://jodo-desk-production.up.railway.app/preview/${id}`
+    const url = `https://jodo.com.br/preview/${id}`
     window.open(url, '_blank');
   } catch (error) {
     console.log(error)
