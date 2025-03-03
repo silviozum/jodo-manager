@@ -129,6 +129,12 @@ onBeforeUnmount(() => {
                   >
                   <argon-input type="text" v-model="event.image_thumb" />
                 </div>
+                <div class="col-md-6">
+                  <label for="example-text-input" class="form-control-label"
+                    >Link Do Evento</label
+                  >
+                  <argon-input type="text" v-model="event.eventLink" />
+                </div>
               </div>
               <hr class="horizontal dark" />
               <p class="text-uppercase text-sm">Informaçoes</p>

@@ -59,7 +59,8 @@ async function update(data) {
         info: data.info,
         name: data.name,
         when: formattedDate,
-        published: data.published
+        published: data.published,
+        eventLink: data.eventLink
     }
     const event = await axios
     .put(`${API}/event/update/${data.id}`, formatedData, {
