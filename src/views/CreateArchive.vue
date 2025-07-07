@@ -221,6 +221,12 @@ onBeforeUnmount(() => {
                   >
                   <argon-input type="text" v-model="archive.video" @change="getVideoLink(archive.video)"/>
                 </div>
+                <div class="col-md-12">
+                  <label for="example-text-input" class="form-control-label"
+                    >Data de criação</label
+                  >
+                  <argon-input type="date" v-model="archive.originDate"/>
+                </div>
                 <div class="col-md-12" style="margin-top: 60px;">
                   <div>
                         <QuillEditor 

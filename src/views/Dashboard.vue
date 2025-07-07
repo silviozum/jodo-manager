@@ -1,5 +1,6 @@
 <script setup>
 import MiniStatisticsCard from "@/examples/Cards/MiniStatisticsCard.vue";
+import Releases from "./components/Releases.vue";
 import Carousel from "./components/Carousel.vue";
 import CategoriesList from "./components/CategoriesList.vue";
 import Board from "./components/Board.vue";
@@ -96,13 +97,15 @@ onMounted(() => {
           </div>
           <div class="col-lg-7">
             <carousel :events="events"/>
+            <div class="row mt-4">
+              <releases/>
+            </div>
           </div>
         </div>
         <div class="row mt-4">
           <div class="col-lg-5 mb-lg">
             <Board/>
           </div>
-
         </div>
       </div>
     </div>
